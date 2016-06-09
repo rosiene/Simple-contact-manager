@@ -7,5 +7,5 @@ contacts << { name: "Genghis Khan"    , phone: "+976 2 194 2222" , email: "conta
 contacts << { name: "Malcom X"        , phone: "+1 310 155 8822" , email: "x@theroost.org"     }
 
 contacts.each_with_index do |contact, i|
-   puts "#{i}) #{contact[:name]}"
+   puts "#{i+1}) #{contact[:name]}"
 end
