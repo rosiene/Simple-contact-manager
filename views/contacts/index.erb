@@ -1,0 +1,18 @@
+<a class="btn btn-default" href="/contacts/new">New</a>
+<br>
+<br>
+<div class="panel panel-primary">
+  <div class="panel-heading">Contacts</div>
+  <div class="panel-body">
+    <table class="table">
+    <% @contacts.each_with_index do |contact, i| %>
+      <tr>
+        <td><%= contact[:name] %></td>
+        <td><%= contact[:phone] %></td>
+        <td><%= contact[:email] %></td>
+        <td><a class="btn btn-default" href="/contacts/<%= i %>">Show</a></td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+</div>
