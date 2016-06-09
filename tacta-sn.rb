@@ -13,6 +13,17 @@ get '/contacts' do
   erb :'contacts/index'
 end
 
+post '/contacts/search' do
+  @text = params[:text_search]
+  @contacts = []
+  read_contacts.each do |contact|
+    if contact[:name].upcase.index(params[:text_search].upcase) != nil
+      @contacts << contact
+    end
+  end
+  erb :'contacts/search'
+end
+
 get '/contacts/new' do
    erb :'contacts/new'
 end

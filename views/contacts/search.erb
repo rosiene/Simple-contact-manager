@@ -3,11 +3,13 @@
 <br>
 <form class="form-group" action="/contacts/search" method="POST">
   <div class="input-group">
-    <input type="text" class="form-control" name="text_search" placeholder="Search by name...">
+    <input value="<%= @text %>"" type="text" class="form-control" name="text_search" placeholder="Search by name...">
     <span class="input-group-btn">
       <input class="btn btn-default" type="submit" value="Go!">
     </span>
   </div>
+  <br>
+  <h3>Searching by "<%= @text %>" <a class="btn btn-default" href="/contacts">Clear</a></h3>
 </form>
 <br>
 <div class="panel panel-primary">
