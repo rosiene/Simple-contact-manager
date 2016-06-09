@@ -3,12 +3,12 @@
     <h3 class="panel-title">Edit Contact</h3>
   </div>
   <div class="panel-body">
-    <form class="form-group" action="/contacts/<%= @i %>/update" method="POST">
+    <form class="form-group" action="/contacts/<%= @contact[:id] %>/update" method="POST">
       <p>Name <input type="text" class="form-control" name="name" value="<%= @contact[:name] %>"></p>
       <p>Phone <input type="text" class="form-control" name="phone" value="<%= @contact[:phone] %>"></p>
       <p>Email <input type="text" class="form-control" name="email" value="<%= @contact[:email] %>"></p>
       <input class="btn btn-default" type="submit" value="Update">
-      <a  class="btn btn-default" href="/contacts/<%= @i %>">Cancel</a>
+      <a  class="btn btn-default" href="/contacts/<%= @contact[:id] %>">Cancel</a>
     </form>
   </div>
 </div>

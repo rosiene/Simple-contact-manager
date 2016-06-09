@@ -4,8 +4,8 @@ require './contacts_file'
 set :port, 4567
 
 get '/' do
-   "<h1>Tacta Contact Manager</h1>"
-
+  "<h1>Tacta Contact Manager</h1>
+  <a href=\"/contacts\">Contacts</a>"
 end
 
 get '/contacts' do
@@ -25,55 +25,87 @@ post '/contacts/search' do
 end
 
 get '/contacts/new' do
-   erb :'contacts/new'
+  erb :'contacts/new'
 end
 
-get '/contacts/:i/edit' do
-   @i = params[:i].to_i
+get '/contacts/:id/edit' do
+  @id = params[:id].to_i
 
-   contacts = read_contacts
-   @contact = contacts[@i]
+  contacts = read_contacts
+  @contact = contacts.select { |contact| contact[:id] == @id }.first
 
-   erb :'contacts/edit'
+  erb :'contacts/edit'
 end
 
-post '/contacts/:i/update' do
-   i = params[:i].to_i
+post '/contacts/:id/update' do
+  id = params[:id].to_i
 
-   updated_contact = { name: params[:name], phone: params[:phone], email: params[:email] }
+  updated_contact = {
+    id: params[:id].to_i,
+    name: params[:name],
+    phone: params[:phone],
+    email: params[:email]
+  }
 
-   contacts = read_contacts
-   contacts[i] = updated_contact
-   write_contacts( contacts )
+  contacts = read_contacts
 
-   redirect "/contacts/#{i}"
+  index = contacts.rindex { |contact| contact[:id] == id }
+
+  contacts[index] = updated_contact
+  write_contacts( contacts )
+
+  redirect "/contacts/#{id}"
 end
 
-get '/contacts/:i/delete' do
-   i = params[:i].to_i
+get '/contacts/:id/delete' do
+  id = params[:id].to_i
 
-   contacts = read_contacts
-   contacts.delete_at( i )
-   write_contacts( contacts )
+  contacts = read_contacts
+  index = contacts.rindex { |contact| contact[:id] == id }
 
-   redirect "/contacts"
+  contacts.delete_at( index )
+  write_contacts( contacts )
+
+  redirect "/contacts"
 end
 
-get '/contacts/:i' do
-   @i = params[:i].to_i
-   contacts = read_contacts
-   @contact = contacts[@i]
-   erb :'contacts/show'
+get '/contacts/:id' do
+  id = params[:id].to_i
+  @contact = get_contact(id)
+  erb :'contacts/show'
 end
 
 post '/contacts' do
-   new_contact = { name: params[:name], phone: params[:phone], email: params[:email] }
+  id = get_next_id
 
-   contacts = read_contacts
-   contacts << new_contact
-   write_contacts( contacts )
+  new_contact = {
+    id: id,
+    name:  params[:name],
+    phone: params[:phone],
+    email: params[:email]
+  }
 
-   i = contacts.length - 1
+  contacts = read_contacts
+  contacts << new_contact
+  write_contacts( contacts )
 
-   redirect "/contacts/#{i}"
+  redirect "/contacts/#{id}"
+end
+
+#return contact by id
+def get_contact(id)
+  contacts = read_contacts
+  contacts.select { |contact| contact[:id] == id }.first
+end
+
+#return next id in the contacts
+def get_next_id
+  id = 0
+  contacts = read_contacts
+  contacts.each do |contact|
+    if id < contact[:id]
+      id = contact[:id]
+    end
+  end
+  id + 1
 end

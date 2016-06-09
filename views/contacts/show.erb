@@ -1,8 +1,8 @@
-<h1><%= @contact[:name] %></h1>
+<h2><%= @contact[:name] %></h2>
 <p><%= @contact[:phone] %></p>
 <p><%= @contact[:email] %></p>
 
 <br>
-<a class="btn btn-default" href="/contacts/<%= @i %>/edit">Edit</a>
-<a class="btn btn-default" href="/contacts/<%= @i %>/delete">Delete</a>
+<a class="btn btn-default" href="/contacts/<%= @contact[:id] %>/edit">Edit</a>
+<a class="btn btn-default" href="/contacts/<%= @contact[:id] %>/delete">Delete</a>
 <a class="btn btn-default" href="/contacts">Index</a>

@@ -28,7 +28,7 @@
             <td><%= contact[:name] %></td>
             <td><%= contact[:phone] %></td>
             <td><%= contact[:email] %></td>
-            <td><a class="btn btn-default" href="/contacts/<%= i %>">Show</a></td>
+            <td><a class="btn btn-default" href="/contacts/<%= contact[:id] %>">Show</a></td>
           </tr>
         <% end %>
       </tbody>
