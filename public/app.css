@@ -4,5 +4,19 @@ button a {
 }
 
 body {
-  margin: 30px
+  background-image:url('/img/checkered_pattern.png');
+
+}
+h1{
+  color: #c68b00
+}
+thead{
+  font-weight: bold;
+}
+footer{
+  display: flex;
+  height: 80px;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
 }

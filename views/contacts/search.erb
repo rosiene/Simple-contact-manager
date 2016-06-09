@@ -9,21 +9,31 @@
     </span>
   </div>
   <br>
-  <h3>Searching by "<%= @text %>" <a class="btn btn-default" href="/contacts">Clear</a></h3>
+  <h3>Searching for "<%= @text %>" <a class="btn btn-default" href="/contacts">Clear</a></h3>
 </form>
 <br>
 <div class="panel panel-primary">
   <div class="panel-heading">Contacts</div>
   <div class="panel-body">
     <table class="table">
-    <% @contacts.each_with_index do |contact, i| %>
-      <tr>
-        <td><%= contact[:name] %></td>
-        <td><%= contact[:phone] %></td>
-        <td><%= contact[:email] %></td>
-        <td><a class="btn btn-default" href="/contacts/<%= i %>">Show</a></td>
-      </tr>
-    <% end %>
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Phone</td>
+          <td>E-mail</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @contacts.each_with_index do |contact, i| %>
+          <tr>
+            <td><%= contact[:name] %></td>
+            <td><%= contact[:phone] %></td>
+            <td><%= contact[:email] %></td>
+            <td><a class="btn btn-default" href="/contacts/<%= i %>">Show</a></td>
+          </tr>
+        <% end %>
+      </tbody>
     </table>
   </div>
 </div>
