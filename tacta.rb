@@ -17,6 +17,19 @@ def ask(prompt)
    gets.chomp
 end
 
+def create_new
+   contact = {}
+
+   puts
+   puts "Enter contact info:"
+
+   contact[:name ] = ask "Name? "
+   contact[:phone] = ask "Phone? "
+   contact[:email] = ask "Email? "
+
+   contact
+end
+
 contacts = []
 
 contacts << { name: "Thomas Jefferson", phone: "+1 206 310 1369" , email: "tjeff@us.gov"       }
@@ -28,15 +41,27 @@ contacts << { name: "Malcom X"        , phone: "+1 310 155 8822" , email: "x@the
 loop do
   index(contacts)
 
-  response = ask("Who would you like to see? (q to quit)")
+  response = ask("Who would you like to see? (n for new, q to quit) ")
   break if response == "q"
+  if response == "n"
 
-  i = response.to_i
-  contact = contacts[i-1]
+        contact = create_new
+        contacts << contact
 
-  puts
-  show(contact)
-  puts
+        puts
+        puts "New contact created:"
+        puts
+
+        show(contact)
+        puts
+     else
+      i = response.to_i
+      contact = contacts[i-1]
+
+      puts
+      show(contact)
+      puts
+    end
 end
 
 puts
